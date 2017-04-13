@@ -1,0 +1,5 @@
+Flask
+numpy
+scipy
+sklearn
+flask_sqlalchemy

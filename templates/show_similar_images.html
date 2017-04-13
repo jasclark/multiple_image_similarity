@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block body %}
+  <div class="header">
+    <h1> Results </h1>
+    <h2> The image(s) you selected on the previous page have a blue border and are shown first.  The remaining images are ordered by most similar.  Scores range from 0 to 1. </h2>
+    <button id="button" onclick="location.href='/'" >Try Again</button>
+  </div>
+  <ul>
+  <div>
+  {% for image in target_images %}
+    <div>
+      <li class='selected'>
+        <img src = {{image.url}}>
+        <p>selected</p>
+      </li>
+    </div>
+  {% endfor %}
+  {% for image in images %}
+    {% if image.id not in target_ids %}
+    <div>
+      <li>
+        <img src = {{image.url}}>
+        <p>score: {{ image.score }}</p>
+      </li>
+    </div>
+    {% endif %}
+  {% endfor %}
+  </ul>
+{% endblock %}

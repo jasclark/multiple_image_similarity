@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block body %}
+  <div class='header'>
+    <h1> Multiple Image Similarity Demo </h1>
+    <h2> Choose one or more images and click "run" </h2>
+    <button id="button" onclick="run()" >run</button>
+  </div>
+  <ul>
+  {% for image in images %}
+    <div>
+    <li id={{image.id}} onclick="chooseImage({{image.id}})"">
+        <img src={{image.url}}>
+    </li>
+    </div>
+  {% endfor %}
+  </ul>
+  <script>
+
+    var chosenImages = []
+    function chooseImage(id) {
+      var el = document.getElementById(id).classList.toggle('selected')
+      idx = chosenImages.indexOf(id)
+      if (idx > -1) {
+        chosenImages.splice(idx, 1)
+      }else {
+        if (id != "None" && id != ""){
+          chosenImages.push(id)
+        }
+      }
+    }
+
+    function run(){
+      location.href="/show_similar_images?image_ids=" + chosenImages.toString()
+    }
+  </script>
+{% endblock %}
